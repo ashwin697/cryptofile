@@ -1,0 +1,106 @@
+{% extends "loaded/base.html" %}
+
+{% block home %}active{% endblock %}
+
+{% block title %}CryptoFile{% endblock %}
+
+{% block body %}
+{% load static %}
+	
+	<div id="carouselExampleControls" class="carousel slide bs-slider box-slider" data-ride="carousel" data-pause="hover" data-interval="false" >
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+			<li data-target="#carouselExampleControls" data-slide-to="1"></li>
+			<li data-target="#carouselExampleControls" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="carousel-item active">
+				<div id="home" class="first-section" style="background-image:url({% static 'images/enc.jpg' %});">
+					<div class="dtab">
+						<div class="container">
+							<div class="row">
+								<!-- <div class="col-md-12 col-sm-12 text-right">
+									<div class="big-tagline">
+										<h2 data-animation="animated zoomInRight"><strong>cryptoFILE</strong> Be secure</h2>
+										<p class="lead">Encrypt your Important data here. Simply upload your file and Provide your Password
+        and within few seconds your your data will be encrypted</p>
+											<a href="/cf/encrypt" class="hover-btn-new"><span>Encrypt Here</span></a>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<a href="/cf/contact" class="hover-btn-new"><span>Contact Us</span></a>
+									</div>
+								</div> -->
+
+								<div class="col-md-12 col-sm-12 text-right">
+									<div class="big-tagline">
+										<h2 data-animation="animated zoomInRight">cryptoFILE<strong>Be secure</strong></h2>
+										<p class="lead" data-animation="animated fadeInLeft">Encrypt your Important data here. Simply upload your file and Provide your Password
+										and within few seconds your your data will be encrypted.</p>
+										<a href="/cf/encrypt" class="hover-btn-new"><span>Encrypt Here</span></a>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="/cf/contact" class="hover-btn-new"><span>Contact</span></a>
+									</div>
+								</div>
+
+							</div><!-- end row -->            
+						</div><!-- end container -->
+					</div>
+				</div><!-- end section -->
+			</div>
+			<div class="carousel-item">
+				<div id="home" class="first-section" style="background-image:url({% static 'images/dec.jpg' %});">
+					<div class="dtab">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 text-left">
+									<div class="big-tagline">
+										<h2 data-animation="animated zoomInRight">cryptoFILE<strong>Be secure</strong></h2>
+										<p class="lead" data-animation="animated fadeInLeft">Decrypt your encrypted data here. Simply upload your file and Provide your Password which was use to encrypt
+        your data
+        and within few seconds your your data will be decrypted .</p>
+											<a href="/cf/decrypt" class="hover-btn-new"><span>Decrypt Here</span></a>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<a href="/cf/about" class="hover-btn-new"><span>About Us</span></a>
+									</div>
+								</div>
+							</div><!-- end row -->            
+						</div><!-- end container -->
+					</div>
+				</div><!-- end section -->
+			</div>
+			<div class="carousel-item">
+				<div id="home" class="first-section" style="background-image:url({% static 'images/blogi.jpg' %});">
+					<div class="dtab">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 text-center">
+									<div class="big-tagline">
+										<h2 data-animation="animated zoomInRight"><strong>cryptoFILE</strong> Blog update U</h2>
+										<p class="lead" data-animation="animated fadeInLeft">Read our Dialy Blogs . you can Update your self by reading our blogs which will be provide daily security
+        updates and few coding techinques .</p>
+											<a href="/blog" class="hover-btn-new"><span>Read Here</span></a>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<a href="/cf/contact" class="hover-btn-new"><span>Contact Us</span></a>
+									</div>
+								</div>
+							</div><!-- end row -->            
+						</div><!-- end container -->
+					</div>
+				</div><!-- end section -->
+			</div>
+			<!-- Left Control -->
+			<a class="new-effect carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+				<span class="fa fa-angle-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+
+			<!-- Right Control -->
+			<a class="new-effect carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+				<span class="fa fa-angle-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+	
+   
+{% endblock %}

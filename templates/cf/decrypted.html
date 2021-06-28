@@ -1,0 +1,102 @@
+{% extends "loaded/base.html" %}
+
+{% block title %} Decrypted_Files-CryptoFile {% endblock %}
+{% block file %}active{% endblock %}
+{% load humanize %}
+{% block body %}
+{% load static %}
+<div id="testimonials" class="parallax section db parallax-off"
+  style="background-image:url({% static 'images/test.jpg' %});">
+
+
+
+  <div class="container ">
+    <div class="row justify-content-center">
+      <div class="title col-12 col-lg-8">
+        <h6 class="mbr-section-title align-center pb-3 mbr-fonts-style display-4" style="color: yellow;">Decrypted Files
+        </h6>
+
+        {% if page_obj|length < 1 %} <table class="table table-striped ">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Filename</th>
+              <th scope="col">Time</th>
+              <th scope="col">Decrypted Files</th>
+            </tr>
+          </thead>
+          </table>
+          <h6 class="mbr-section-title align-center pb-3 mbr-fonts-style display-4" style="color: yellow;">No File
+            Decrypted</h6>
+          {% else %}
+
+          <table class="table table-striped table-responsive ">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Filename</th>
+                <th scope="col">File</th>
+                <th scope="col">Decrypted Files</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for e in page_obj %}
+              <tr>
+                <th scope="row" style=" font-size:28px; color:yellow;">&#x272A;</th>
+                <td>
+                  <h3 style="color: yellow;">{{e.dfilename}}</h3>
+                </td>
+                <td style="color: yellow;">{{e.ddate | naturaltime}}</td>
+                <td><a href="/{{e}}" download> <button class="btn btn-primary btn-sm">Download</button></a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li>
+      {% if page_obj.has_previous %}
+      <a class="page-link previous round" href="?page={{page_obj.previous_page_number}}" tabindex="-1">
+        << /a>
+          {% endif %}
+    </li>
+    <div class="page-link round px-md-2">
+      <li><a href="?page={{page_obj.number}}">{{page_obj.number}}</a></li>
+    </div>
+    <li>
+      {% if page_obj.has_next %}
+      <a class="page-link next round" href="?page={{page_obj.next_page_number}}">></a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+{% endif %}
+<style>
+  .page-link {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .next {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .previous {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .round {
+    border-radius: 50%;
+  }
+</style>
+
+
+</div>
+
+{% endblock %}

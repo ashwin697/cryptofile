@@ -1,0 +1,77 @@
+{% extends "loaded/base.html" %}
+
+{% block wordenc %}active{% endblock %}
+
+{% block title %} Wordeccryption-CryptoFile {% endblock %}
+
+{% block body %}
+{% load static %}
+<div id="testimonials" class="parallax section db parallax-off"
+  style="background-image:url({% static 'images/wordenc.jpg' %});">
+
+
+
+<div class='container'>
+ <h1 class="mbr-section-title align-center pb-3 mbr-fonts-style display-4" style="color: darkorange;">Encrypt</h1>
+<div class='row'>
+<div class='col-md-6'> 
+<form class="md-form my-4" action="/cf/wordenc/" method="post" enctype="multipart/form-data">{% csrf_token %}
+<div>
+<textarea
+            type="text"
+            class="form-control"
+            name="data"
+            rows="7"
+            data-form-field="Message"
+            id="data"
+            required
+          >{{data}}</textarea></div>
+           <div class="form-group my-4">
+          <label style="color: darkorange;">Password :</label>
+          <input type="password" id="wpassword" name="wpassword" class="form-control col-md-8"
+            data-toggle="password" placeholder="Enter Your Password to Encrypt " required>
+        </div>
+        <div class="form-group my-4 ">
+          <hr>
+          <button class="btn btn-outline-warning" type="submit">Encrypt</button>
+        </div>
+</form>
+</div>
+<div class='col-md-6 row my-4'>
+
+<div class="container">
+<textarea
+            type="text"
+            class="form-control"
+            name="c"
+            rows="7"
+            data-form-field="Message"
+            id="c"
+          >{{enc}}</textarea></div>
+          <div class="my-1 mx-4">
+          <button onclick="copyt()" class='btn btn-sm btn-outline-warning my-4'>Copy To Clipboard</button>
+</div>
+</div>
+</div>
+</div>
+{% block js %}
+
+<script>
+function copyt() {
+  /* Get the text field */
+  var copyText = document.getElementById("c");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /For mobile devices/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+}
+</script>
+
+{% endblock %}
+
+</div>
+{% endblock %}

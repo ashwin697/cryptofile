@@ -1,0 +1,88 @@
+{% extends "loaded/base.html" %}
+
+{% block decrypt %}active{% endblock %}
+
+{% block title %} Decryption-CryptoFile {% endblock %}
+
+
+
+{% block body %}
+{% load static %}
+<div id="testimonials" class="parallax section db parallax-off"
+  style="background-image:url({% static 'images/test2.jpg' %});">
+
+
+
+
+<div class="container my-2">
+  <div class="row justify-content-center">
+    <div class="title col-12 col-lg-8">
+       <h1 class="mbr-section-title align-center pb-3 mbr-fonts-style display-4" style="color: darkorange;">Decryption</h1>
+      <hr>
+      <form class="md-form my-4" action="/cf/decrypt/" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+
+        <div class="form-group ">
+          <label for="name" style="color: darkorange;">Name :</label>
+          <input type="text" class="form-control col-md-8" id="name" name='name' placeholder="Enter Your Name" required>
+        </div>
+        <hr>
+
+        <div class="form-group my-4 ">
+          <label style="color: darkorange;">Choose File to Decrypt :</label>
+          <input type="file" id="files" name="files" multiple="multiple" style="color: darkorange;" required>
+
+
+        </div>
+        <hr>
+
+        <div class="form-group my-4">
+          <label style="color: darkorange;">Password :</label>
+          <input type="password" id="password" name="password" class="form-control col-md-8" data-toggle="password"
+            placeholder="Enter Your Password to Decrypt File" style="color: darkorange;" required>
+        </div>
+
+        {% if  user.is_authenticated %}
+
+        <div class="form-group my-4">
+          <hr>
+          <button class="btn btn-outline-warning" type="submit">Decrypt</button>
+        </div>
+
+      </div>
+      </form>
+      
+        {% else %}
+      <hr>
+      <div class="my-2">
+
+    <button type="button" class="btn btn-outline-warning mr-2" data-toggle="modal" data-target="#login">
+          Decrypt
+        </button>
+        </div>
+
+{% endif %}
+ {% if  user.is_authenticated %}
+<div class="alert alert-warning alert-dismissible fade show my-2" role="alert">
+  <strong>You May Not Get Your Exact File Extension like (exe,pdf,etc)</strong> Because of some security reason, But you can Rename your File with your Exact Extension. To get Working with your file !!!
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+{% endblock %}

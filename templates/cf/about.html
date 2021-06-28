@@ -1,0 +1,79 @@
+{% extends "loaded/base.html" %}
+
+{% block about %}active{% endblock %}
+
+{% block title %}CryptoFile{% endblock %}
+
+{% block body %}
+	
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>About Us<span class="m_1">CryptoFile Proctect's Data</span></h1>
+		</div>
+	</div>
+	
+    <div id="overviews" class="section lb">
+        <div class="container">
+            <div class="section-title row text-center">
+                <div class="col-md-8 offset-md-2">
+                    <h3>About</h3>
+                    <p class="lead">CryptoFile is developed for Protection of Important Data, So that Data cannot be steal </p>
+                </div>
+            </div><!-- end title -->
+        
+           
+				
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="message-box">
+                    <div class="section-title row text-center">
+                        <h2 class="lead">CryptoFile</h2>
+                        <p class="lead">Here you can Encrypt or Decrypt your personal information and read our Blogs to update yourself</p>
+                    </div>
+                    <div class="row section-title row text-center">
+                        <a href="/cf/encrypt" class="hover-btn-new orange"><span>Encrypt Here</span></a>
+                        <a href="/cf/decrypt" class="hover-btn-new orange"><span>Decrypt Here</span></a>
+                    </div>
+                    </div><!-- end messagebox -->
+                </div><!-- end col -->
+				
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->
+	
+	<div class="hmv-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="inner-hmv">
+						<div class="icon-box-hmv"><i class="flaticon-achievement"></i></div>
+						<h3>Encrypt</h3>
+						<div class="tr-pa">M</div>
+						<p>Encrypt your Important data here. Simply upload your file and Provide your Password
+        and within few seconds your your data will be encrypted ..</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="inner-hmv">
+						<div class="icon-box-hmv"><i class="flaticon-eye"></i></div>
+						<h3>Blog</h3>
+						<div class="tr-pa">V</div>
+						<p>>Read our Dialy Blogs . you can Update your self by reading our blogs which will be provide daily security
+        updates and few coding techinques .</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="inner-hmv">
+						<div class="icon-box-hmv"><i class="flaticon-history"></i></div>
+						<h3>Decrypt</h3>
+						<div class="tr-pa">H</div>
+						<p>Decrypt your encrypted data here. Simply upload your file and Provide your Password which was use to encrypt
+        your data
+        and within few seconds your your data will be decrypted .</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+   
+   {% endblock %}

@@ -1,0 +1,97 @@
+{% extends "loaded/base.html" %}
+
+{% block blog %}active{% endblock %}
+
+{% block title %}Blog - CryptoFile{% endblock %}
+{% load humanize %} 
+{% load extra %}
+
+
+{% block js %}
+<script>
+  let previews = document.getElementsByClassName('preview');
+  Array.from(previews).forEach((element) => {
+    element.innerHTML = element.innerText
+  })
+</script>
+{% endblock %}
+
+{% block body %}
+	
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>Blog<span class="m_1">Be Updated any time.</span></h1>
+		</div>
+	</div>
+	
+    <div id="overviews" class="section wb">
+        <div class="container">
+            <div class="section-title row text-center">
+                <div class="col-md-8 offset-md-2">
+                    <p class="lead">Read Daily update's Update yourself</p>
+                </div>
+            </div><!-- end title -->
+
+            <hr class="invis"> 
+            <div class="row"> 
+ {% for post in page_obj %}
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="blog-item">
+						<div class="blog-title">
+							<h2><a href="/blog/{{post.slug}}" title="">{{post.title}}</a></h2>
+						</div>
+						<div class="meta-info-blog">
+							<span><i class="fa fa-calendar"></i> <a href="#">{{post.timestamp| naturaltime|truncatechars:10}}</a> </span>
+                            <span><i class="fa fa-tag"></i>  <a href="#"> views ({{post.views}})</a> </span>
+                            <span><i class="fa fa-comments"></i> <a href="#">{{comments.count}} Comments</a></span>
+						</div>
+						<div class="blog-desc preview ">
+            <p>  <a href="/blog/{{post.slug}}" title="">{{post.content|safe|truncatechars:400}}</a></p>
+						</div>
+						<div class="blog-button">
+							<a class="hover-btn-new orange" href="/blog/{{post.slug}}"><span>Read More<span></a>
+						</div>
+					</div>
+                </div><!-- end col -->
+{% endfor %}
+     </div><!-- end container -->
+    </div><!-- end section -->
+           
+	<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li>
+    {% if page_obj.has_previous %}
+      <a class="page-link previous round" href="?page={{page_obj.previous_page_number}}" tabindex="-1"><</a>
+      {% endif %}
+    </li>
+    <div class="page-link round px-md-2">
+    <li><a href="?page={{page_obj.number}}">{{page_obj.number}}</a></li></div>
+    <li>
+    {% if page_obj.has_next %}
+      <a class="page-link next round" href="?page={{page_obj.next_page_number}}">></a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>	
+  <style>
+
+.page-link {
+  background-color: #ddd;
+  color: black;
+}
+
+.next {
+  background-color: #ddd;
+  color: black;
+}
+.previous {
+  background-color: #ddd;
+  color: black;
+}
+
+.round {
+  border-radius: 50%;
+}
+</style> 
+
+{% endblock %}

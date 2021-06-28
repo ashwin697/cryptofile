@@ -1,0 +1,134 @@
+{% extends "loaded/base.html" %}
+{% block title %}post {% endblock %} 
+{% block body %} 
+{% load humanize %} 
+{% load extra %}
+
+<style>
+
+.text-break {
+    word-break: break-word!important;
+    overflow-wrap: break-word!important;
+}
+</style>
+
+<div class="container blog-post my-3">
+  <h1 class="blog-post-title">{{post.title}}</h1>
+  <p class="blog-post-meta">
+    {{post.timestamp| naturaltime}} by <a href="/cf/about"> {{post.author}}</a
+    ><span> views ({{post.views}})</span>
+  </p>
+  <hr />
+  <div class="text-break">{{post.content|safe}}</div>
+  <hr />
+  <div class="container">
+    <h2>Comments ({{comments.count}})</h2>
+    <div class="my-2">
+      {% if user.is_authenticated %}
+
+      <form action="/blog/postComment" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="exampleInputEmail">Post comment</label>
+          <input
+            class="form-control col-md-9"
+            type="text"
+            name="comments"
+            id="comments"
+            placeholder="comment here"
+            required
+          />
+        </div>
+        <input type="hidden" name="parentsno" value="" />
+        <input type="hidden" name="postSno" value="{{post.sno}}" />
+        <button type="submit" class="btn btn-primary">post</button>
+      </form>
+
+      {% else %}
+      <p
+        class="btn btn-outline-danger mr-2"
+        data-toggle="modal"
+        data-target="#login"
+      >
+        please login to Comment
+      </p>
+      {% endif %}
+    </div>
+
+    {% for comment in comments %}
+    <div class="row my-3 mx-0">
+      <i style="font-size: 24px" class="fas">👦</i>
+
+      <div class="col-md-11">
+        <b>{{user.first_name}} {{user.last_name}}</b>
+        <span style="font-size: 58%" class="badge badge-success">
+          {{comment.timestamp | naturaltime}}</span
+        >
+        <div class="text-break">{{comment.comment}}</div>
+
+        {% if user.is_authenticated %}
+        <div class="reply mx-0">
+          <button
+            class="btn btn-primary btn-sm my-2"
+            type="button"
+            data-toggle="collapse"
+            data-target="#replyBox{{comment.sno}}"
+            aria-expanded="false"
+            aria-controls="#replyBox{{comment.sno}}"
+          >
+            Reply
+          </button>
+          <div class="collapse" id="replyBox{{comment.sno}}">
+            <form action="/blog/postComment" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label class="exampleInputEmail">Reply a comment</label>
+                <input
+                  class="form-control col-md-7"
+                  type="text"
+                  name="comments"
+                  id="comments"
+                  placeholder="reply here"
+                  required
+                />
+                <input type="hidden" name="parentsno" value="{{comment.sno}}" />
+              </div>
+              <input type="hidden" name="postSno" value="{{post.sno}}" />
+              <button type="submit" class="btn btn-primary">post</button>
+            </form>
+          </div>
+        </div>
+        {% else %}
+
+        <div class="my-2">
+          <button
+            type="button"
+            class="btn btn-outline-success mr-2"
+            data-toggle="modal"
+            data-target="#login"
+          >
+            Reply
+          </button>
+        </div>
+
+        {% endif %} {% for reply in replyDict|get_val:comment.sno %}
+        <div class="row my-1 col-xs col-sm col-md">
+          <i class="icon">👨‍👨‍👦</i>
+
+          <div class="col-md-11">
+            <b>{{reply.user.first_name}} {{reply.user.last_name}}</b>
+            <span style="font-size: 58%" class="mb-0 badge badge-success">
+              {{reply.timestamp | naturaltime}}</span
+            >
+            <div class="text-break">{{reply.comment}}</div>
+            <br />
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

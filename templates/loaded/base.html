@@ -1,0 +1,360 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+   
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+     <!-- Site Metas -->
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <!-- ALL VERSION CSS -->
+    <link rel="stylesheet" href="{% static 'css/versions.css' %}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <!-- Modernizer for Portfolio -->
+    <script src="{% static 'js/modernizer.js' %}"></script>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <title>{% block title %}  {% endblock %}</title>
+</head>
+<body class="host_version"> 
+
+   <div class="search">
+				<form action="/blog/search"class="search-form">
+					<input type="text" id="query" name="query" placeholder="Search for blogs by authors, title  and more..">
+					<!-- <input type="submit" value="Submit"> -->
+				</form>
+			</div>
+	<!-- Modal -->
+	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header tit-up">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">User Login</h4>
+			</div>
+			<div class="modal-body customer-box">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs">
+					<li><a class="active" href="#Login" data-toggle="tab">Login</a></li>
+					<li><a href="#Registration" data-toggle="tab">Registration</a></li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="Login">
+						<form role="form" action="/blog/login" method="post" class="form-horizontal">{% csrf_token %}
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input class="form-control" id="loginusername" name="loginusername" placeholder="Username" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input type="password" class="form-control" id="loginpassword" name="loginpassword" placeholder="Password" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-10">
+									<button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+										Submit
+									</button>
+									<a class="for-pwd" href="/reset_password">Forgot your password?</a>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="tab-pane" id="Registration">
+						<form role="form"  action='/blog/signup' method='post' class="form-horizontal">{% csrf_token %}
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input id="username" name="username"class="form-control" placeholder="Username" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input id="userfirstname" name="userfirstname"class="form-control" placeholder="First Name" type="text">
+								</div>
+							</div>					
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input id="userlastname" name="userlastname"class="form-control" placeholder="Last Name" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input class="form-control" id="useremail" name="useremail" placeholder="Email" type="email">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input class="form-control" id="userpassword" name="userpassword" placeholder="Password" type="password">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input class="form-control" id="usercpassword" name="usercpassword" placeholder="Confirm Password" type="password">
+								</div>
+							</div>
+							<div class="row">							
+								<div class="col-sm-10">
+									<button type="sumbit" class="btn btn-light btn-radius btn-brd grd1">
+										Save &amp; Continue
+									</button>
+									
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	  </div>
+	</div>
+
+	<!-- LOADER -->
+	<div id="preloader">
+		<div class="loader-container">
+			<div class="progress-br float shadow">
+				<div class="progress__item"></div>
+			</div>
+		</div>
+	</div>
+	<!-- END LOADER -->	
+
+    <!-- Start header -->
+	<header class="top-navbar my-1">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<!-- <a class="navbar-brand" href="/">
+					<img src="{% static 'images/logo.png' %}" alt="" /> -->
+					{% if  user.is_authenticated %}
+					<a href="/"><h1 style="color:yellow;">Hi {{request.user.first_name}} {{request.user.last_name}}</h1></a>
+					{% else %}
+					<h3 style="color: yellow;">Hello Visitor</h3>
+					{% endif %}
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-host">
+					<ul class="navbar-nav ml-auto">
+						 <li class="nav-item {% block home %} {% endblock %}"><a class="nav-link" href="/">Home</a></li>
+						 <li class="nav-item {% block about %} {% endblock %}"><a class="nav-link" href="/cf/about">About Us</a></li>
+						 <li class="nav-item dropdown {% block encrypt %} {% endblock %}">
+							<a class="nav-link dropdown-toggle " href="#" id="dropdown-a" data-toggle="dropdown">Encryption </a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="/cf/encrypt">File Encryption </a>
+								<a class="dropdown-item" href="/cf/wordenc">Sentence Encryption</a>
+							</div>
+						</li>
+						  <li class="nav-item dropdown {% block decrypt %} {% endblock %}">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Decryption </a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="/cf/decrypt">File Decryption </a>
+								<a class="dropdown-item" href="/cf/worddec">Sentence Decryption </a>
+							</div>
+						</li>
+						{% if  user.is_authenticated %}
+
+						</li>
+						  <li class="nav-item dropdown {% block file %} {% endblock %}">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Files </a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="/cf/encrypted">Encrypted Files </a>
+								<a class="dropdown-item" href="/cf/decrypted">Decrypted Files</a>
+							</div>
+						</li>
+						{% endif %}
+
+
+						  <li class="nav-item {% block blog %} {% endblock %}"><a class="nav-link" href="/blog">Blog</a></li>
+						{% if  user.is_staff %}
+						  <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
+						{% endif %}
+						<li class="nav-item {% block contact %} {% endblock %}"><a class="nav-link" href="/cf/contact">Contact</a></li>
+					</ul>
+					{% if  user.is_authenticated %}
+					<ul class="nav navbar-nav navbar-right">
+                        <li><a class="hover-btn-new log" href="/blog/logout" ><span>Log Out</span></a></li>
+                    </ul>
+					{% else %}
+
+					<ul class="nav navbar-nav navbar-right">
+                        <li><a class="hover-btn-new log" href="#" data-toggle="modal" data-target="#login"><span>Log Now</span></a></li>
+                    </ul>
+
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header -->
+
+	{% for message in messages %}
+  <div class="alert my-0 alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    <strong>Message:</strong>{{message}}
+    <button type="button" class="close rounded" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+
+
+    
+{% block body %} {% endblock %}
+{% block js%} {% endblock %}
+
+
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>About US</h3>
+                        </div>
+                        <p> The main purpose for developing this site is to secure your personal information by changing it to another form 
+						, So no one get access easily </p>
+                        <div class="footer-right">
+							<ul class="footer-links-soi">
+								<li><a href="https://www.facebook.com/Ashwin.m.kanojia/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="https://github.com/Ashwin697" target="_blank" ><i class="fa fa-github"></i></a></li>
+								<li><a href="https://twitter.com/Ashwin697" target="_blank"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="https://instagram.com/ashwin_697" target="_blank" ><i class="fa fa-instagram"></i></a></li>
+							
+							</ul><!-- end links -->
+						</div>
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+
+				<div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Information Link</h3>
+                        </div>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/blog">Blog</a></li>
+							<li><a href="/cf/about">About</a></li>
+							<li><a href="/cf/contact">Contact</a></li>
+                        </ul><!-- end links -->
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+				
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Contact Details</h3>
+                        </div>
+
+                        <ul class="footer-links">
+                            <li><a href="mailto:kanojiaashwin18@gmail.com">kanojiaashwin18@gmail.com</a></li>
+                            <li><a href="https://ashwin51.wordpress.com/" target="_blank">ashwin51.wordpress.com</a></li>
+                            <li>Mumbai Maharashtra</li>
+                            <li>+91 98 1927 8195</li>
+                        </ul><!-- end links -->
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+				
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </footer><!-- end footer -->
+
+    <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+    <!-- ALL JS FILES -->
+    <script src="{% static 'js/all.js' %}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCKjLTXdq6Db3Xit_pW_GK4EXuPRtnod4o"></script>
+	<!-- Mapsed JavaScript -->
+	<script src="{% static 'js/mapsed.js' %}"></script>
+	<script src="{% static 'js/01-custom-places-example.js' %}"></script>
+    <!-- ALL PLUGINS -->
+    <script src="{% static 'js/custom.js' %}"></script>
+<style>
+
+.search
+{
+	border: 2px solid #CF5C3F;
+	overflow: auto;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.search input[type="text"]
+{
+	border: 0px;
+	width: 70%;
+	padding: 6px 6px;
+}
+
+.search input[type="text"]:focus
+{
+	outline: 0;
+}
+
+.search input[type="submit"]
+{
+	border: 1px;
+	background: none;
+	background-color: #3fcf5e;
+	color: rgb(255, 255, 255);
+	float: right;
+	padding: 6px;
+	border-radius-top-right: 3px;
+	-moz-border-radius-top-right: 5px;
+	-webkit-border-radius-top-right: 5px;
+	border-radius-bottom-right: 4px;
+	-moz-border-radius-bottom-right: 5px;
+	-webkit-border-radius-bottom-right: 5px;
+        cursor:pointer;
+}
+
+/* ===========================
+   ====== Medua Query for Search Box ====== 
+   =========================== */
+
+@media only screen and (min-width : 150px) and (max-width : 780px)
+{
+	
+	.search
+	{
+		width: 100%;
+		margin: 0 auto;
+	}
+
+}
+
+</style>
+	
+</body>
+</html>

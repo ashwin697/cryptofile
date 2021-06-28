@@ -1,0 +1,56 @@
+{% extends "loaded/base.html" %}
+{% load humanize %} 
+{% load extra %}
+
+{% block js %}
+<script>
+  let previews = document.getElementsByClassName('preview');
+  Array.from(previews).forEach((element) => {
+    element.innerHTML = element.innerText
+  })
+</script>
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container my-4">
+  <h2>search results : </h2>
+  <hr>
+  {% if allpost|length < 1 %}
+  <p>No search results found</p>
+
+  your search query: <b>{{query}} </b> did not mach any documents. <br>
+  Suggestions: <br>
+  <ul>
+    <li>
+      Try different keywords.
+    </li>
+  </ul>
+  {% endif %}
+        <div class="row"> 
+ {% for post in allpost %}
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="blog-item">
+						<div class="blog-title">
+							<h2><a href="/blog/{{post.slug}}" title="">{{post.title}}</a></h2>
+						</div>
+						<div class="meta-info-blog">
+							<span><i class="fa fa-calendar"></i> <a href="#">{{post.timestamp| naturaltime|truncatechars:10}}</a> </span>
+                            <span><i class="fa fa-tag"></i>  <a href="#"> views ({{post.views}})</a> </span>
+                            <span><i class="fa fa-comments"></i> <a href="#">{{comments.count}} Comments</a></span>
+						</div>
+						<div class="blog-desc preview ">
+							<p>{{post.content|safe|truncatechars:400}}</p>
+						</div>
+						<div class="blog-button">
+							<a class="hover-btn-new orange" href="/blog/{{post.slug}}"><span>Read More<span></a>
+						</div>
+					</div>
+                </div><!-- end col -->
+{% endfor %}
+     </div><!-- end container -->
+</div>
+
+{% endblock %}
